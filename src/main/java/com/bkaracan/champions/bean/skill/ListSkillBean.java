@@ -7,11 +7,11 @@ import com.bkaracan.champions.mapper.SkillDtoMapper;
 import com.bkaracan.champions.repository.SkillRepository;
 import com.bkaracan.champions.responsepayload.AbstractResponsePayload;
 import com.bkaracan.champions.responsepayload.ResponsePayload;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,7 +23,7 @@ public class ListSkillBean extends AbstractResponsePayload {
     public ResponsePayload<List<SkillDTO>> getSkillsByChampionId(Long championId) {
         List<SkillDTO> skillDTOs = skillRepository.findByChampionId(championId).stream()
                 .map(skillDtoMapper::map)
-                .collect(Collectors.toList());
+                .toList();
 
         if(skillDTOs.isEmpty()) {
             return setResponse(ResponseEnum.NOT_FOUND, MessageEnum.EMPTY_LIST.getMessage());
