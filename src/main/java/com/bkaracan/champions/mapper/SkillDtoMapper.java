@@ -2,9 +2,9 @@ package com.bkaracan.champions.mapper;
 
 import com.bkaracan.champions.dto.SkillDTO;
 import com.bkaracan.champions.entity.Skill;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class SkillDtoMapper {
@@ -30,7 +30,7 @@ public class SkillDtoMapper {
     }
 
     public List<SkillDTO> mapList(List<Skill> skillList) {
-        return skillList.stream().map(this::map).collect(Collectors.toList());
+        return skillList.stream().map(this::map).toList();
     }
 
     public SkillDTO mapWithChampion(Skill skill) {
@@ -42,6 +42,6 @@ public class SkillDtoMapper {
     }
 
     public List<SkillDTO> mapListWithChampion(List<Skill> skillList) {
-        return skillList.stream().map(this::mapWithChampion).collect(Collectors.toList());
+        return skillList.stream().map(this::mapWithChampion).toList();
     }
 }
