@@ -14,7 +14,9 @@ public enum MessageEnum {
     UPDATE_SUCCESS(5, "Record is updated successfully!"),
     DELETE_SUCCESS(6, "Record is deleted successfully!"),
     RECORD_EXISTS(7, "Record is already exists!"),
-    EMPTY_LIST(8, "The list is empty!");
+    EMPTY_LIST(8, "The list is empty!"),
+    ID_REQUIRED(9, "The id is required!"),
+    ID_MUST_BE_NULL(10, "The id must be null!");
 
     private final Integer code;
     private final String message;
