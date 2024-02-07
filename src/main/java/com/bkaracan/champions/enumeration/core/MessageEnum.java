@@ -16,7 +16,9 @@ public enum MessageEnum {
     RECORD_EXISTS(7, "Record is already exists!"),
     EMPTY_LIST(8, "The list is empty!"),
     ID_REQUIRED(9, "The id is required!"),
-    ID_MUST_BE_NULL(10, "The id must be null!");
+    ID_MUST_BE_NULL(10, "The id must be null!"),
+    ROLE_NOT_FOUND(11, "The role not found!"),
+    CHAMPION_NOT_FOUND(12, "The champion not found!");
 
     private final Integer code;
     private final String message;
