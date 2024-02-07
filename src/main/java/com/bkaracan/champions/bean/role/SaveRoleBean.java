@@ -19,20 +19,14 @@ public class SaveRoleBean extends AbstractResponsePayload {
 
     private final RoleRepository roleRepository;
     private final RoleDtoMapper roleDtoMapper;
-    private final FindRoleBean findRoleBean;
 
     @Transactional
     public ResponsePayload<RoleDTO> saveRole(RoleDTO roleDTO) {
-        if (roleDTO.getId() == null) {
+        if(roleDTO.getId() == null) {
             Role savedRole = roleRepository.save(roleDtoMapper.convertToEntity(roleDTO));
-            return setResponse(ResponseEnum.OK, MessageEnum.SAVE_SUCCESS, roleDtoMapper.map(savedRole));
-        } else {
-            ResponsePayload<RoleDTO> roleDTOResponsePayload = findRoleBean.findById(roleDTO.getId());
-            if (roleDTOResponsePayload.getResponseEnum().equals(ResponseEnum.NOT_FOUND)) {
-                Role savedRole = roleRepository.save(roleDtoMapper.convertToEntity(roleDTO));
-                return setResponse(ResponseEnum.OK, MessageEnum.SAVE_SUCCESS, roleDtoMapper.map(savedRole));
-            }
-            return setResponse(ResponseEnum.WARNING, MessageEnum.RECORD_EXISTS.getMessage());
+            RoleDTO savedRoleDTO = roleDtoMapper.map(savedRole);
+            return setResponse(ResponseEnum.OK, MessageEnum.SAVE_SUCCESS, savedRoleDTO);
         }
+        return setResponse(ResponseEnum.ERROR, MessageEnum.ID_MUST_BE_NULL.getMessage());
     }
 }
