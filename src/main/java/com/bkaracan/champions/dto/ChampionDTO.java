@@ -1,5 +1,6 @@
 package com.bkaracan.champions.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
@@ -44,6 +45,7 @@ public class ChampionDTO implements Serializable {
     @Schema(
             description = "Şampiyona ait yeteneklerin listesi"
     )
+    @JsonIgnore
     private List<SkillDTO> skills;
 
 }

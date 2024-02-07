@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -31,20 +32,24 @@ public class ListChampionBean extends AbstractResponsePayload {
         List<Champion> champions = championRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
         List<ChampionDTO> championDTOs = champions.stream()
                 .map(championDtoMapper::map)
-                .collect(Collectors.toList());
+                .toList();
         return setResponse(ResponseEnum.OK, MessageEnum.FETCH_SUCCESS, championDTOs);
     }
 
+    @Transactional
     public ResponsePayload<List<ChampionDTO>> getChampionsByRoleId(Long roleId) {
         Optional<Role> roleOptional = roleRepository.findById(roleId);
         if(roleOptional.isEmpty()) {
-            return setResponse(ResponseEnum.NOT_FOUND, MessageEnum.NOT_FOUND.getMessage());
+            return setResponse(ResponseEnum.NOT_FOUND, MessageEnum.ROLE_NOT_FOUND.getMessage());
         }
         Role role = roleOptional.get();
+        if(role.getChampions().isEmpty()) {
+            return setResponse(ResponseEnum.NOT_FOUND, MessageEnum.CHAMPION_NOT_FOUND.getMessage());
+        }
         List<ChampionDTO> championDTOs = role.getChampions().stream()
                 .map(championDtoMapper::map)
                 .sorted(Comparator.comparing(ChampionDTO::getName))
-                .collect(Collectors.toList());
+                .toList();
         return setResponse(ResponseEnum.OK, MessageEnum.FETCH_SUCCESS, championDTOs);
     }
 }
