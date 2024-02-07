@@ -4,9 +4,10 @@ import com.bkaracan.champions.dto.ChampionDTO;
 import com.bkaracan.champions.dto.SkillDTO;
 import com.bkaracan.champions.entity.Champion;
 import com.bkaracan.champions.entity.Role;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public class ChampionDtoMapper {
@@ -22,9 +23,9 @@ public class ChampionDtoMapper {
 
     public ChampionDTO map(Champion champion) {
 
-        List<Long> roleIds = champion.getRoles().stream()
+        List<Long> roleIds = champion.getRoles() != null ? champion.getRoles().stream()
                 .map(Role::getId)
-                .collect(Collectors.toList());
+                .toList() : Collections.emptyList();
         return ChampionDTO.builder()
                 .id(champion.getId())
                 .name(champion.getName())
@@ -37,13 +38,13 @@ public class ChampionDtoMapper {
     public ChampionDTO mapWithSkills(Champion champion) {
         ChampionDTO championDTO = map(champion);
         List<SkillDTO> skillDTOs = champion.getSkills().stream()
-                .map(new SkillDtoMapper()::map).collect(Collectors.toList());
+                .map(new SkillDtoMapper()::map).toList();
         championDTO.setSkills(skillDTOs);
         return championDTO;
     }
 
     public List<ChampionDTO> mapList(List<Champion> champions) {
         return champions.stream()
-                .map(this::map).collect(Collectors.toList());
+                .map(this::map).toList();
     }
 }
