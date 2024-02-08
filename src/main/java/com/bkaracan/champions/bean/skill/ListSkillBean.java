@@ -10,6 +10,7 @@ import com.bkaracan.champions.responsepayload.ResponsePayload;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ListSkillBean extends AbstractResponsePayload {
     private final SkillRepository skillRepository;
     private final SkillDtoMapper skillDtoMapper;
 
+    @Transactional
     public ResponsePayload<List<SkillDTO>> getSkillsByChampionId(Long championId) {
         List<SkillDTO> skillDTOs = skillRepository.findByChampionId(championId).stream()
                 .map(skillDtoMapper::map)
