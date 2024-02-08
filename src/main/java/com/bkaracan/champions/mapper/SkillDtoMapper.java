@@ -26,22 +26,11 @@ public class SkillDtoMapper {
                 .name(skill.getName())
                 .description(skill.getDescription())
                 .isActive(skill.getIsActive())
+                .championId(skill.getChampion() != null ? skill.getChampion().getId() : null)
                 .build();
     }
 
     public List<SkillDTO> mapList(List<Skill> skillList) {
         return skillList.stream().map(this::map).toList();
-    }
-
-    public SkillDTO mapWithChampion(Skill skill) {
-        SkillDTO skillDTO = map(skill);
-        if(skill.getChampion() != null) {
-            skillDTO.setChampionId(skill.getChampion().getId());
-        }
-        return skillDTO;
-    }
-
-    public List<SkillDTO> mapListWithChampion(List<Skill> skillList) {
-        return skillList.stream().map(this::mapWithChampion).toList();
     }
 }

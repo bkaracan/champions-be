@@ -18,7 +18,8 @@ public enum MessageEnum {
     ID_REQUIRED(9, "The id is required!"),
     ID_MUST_BE_NULL(10, "The id must be null!"),
     ROLE_NOT_FOUND(11, "The role not found!"),
-    CHAMPION_NOT_FOUND(12, "The champion not found!");
+    CHAMPION_NOT_FOUND(12, "The champion not found!"),
+    SKILL_NOT_FOUND(13,"The skill not found!");
 
     private final Integer code;
     private final String message;
