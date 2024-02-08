@@ -1,6 +1,5 @@
 package com.bkaracan.champions.service;
 
-import com.bkaracan.champions.bean.role.ListRoleBean;
 import com.bkaracan.champions.dto.RoleDTO;
 import com.bkaracan.champions.responsepayload.ResponsePayload;
 
