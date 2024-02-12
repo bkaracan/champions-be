@@ -48,11 +48,11 @@ public class AppUser implements UserDetails, Serializable {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    AppUserRoleEnum appUserRoleEnum;
+    AppUserRoleEnum role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(appUserRoleEnum.name()));
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
