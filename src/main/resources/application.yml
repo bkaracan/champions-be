@@ -1,0 +1,17 @@
+spring.jpa:
+  database: POSTGRESQL
+  hibernate.ddl-auto: create-drop
+  show-sql: true
+  properties:
+    hibernate:
+      format_sql: true
+
+spring.datasource:
+  platform: postgres
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/champions
+  username: postgres
+  password: burak123!
+
+jwt:
+  secret: "118abadfa030af1ad693a70586d5c7735376f597b843ab43a76d2052d61684e5"
