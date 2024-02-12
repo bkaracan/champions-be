@@ -23,7 +23,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailServiceImpl userDetailsService;
+    private final UserDetailServiceImpl userDetailsServiceImpl;
 
     @Override
     protected void doFilterInternal(
@@ -40,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = authHeader.substring(7);
         String username = jwtService.extractUsername(token);
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
             if(jwtService.isValid(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authenticationToken =  new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
