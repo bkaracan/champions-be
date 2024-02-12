@@ -20,7 +20,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class JwtServiceImpl implements JwtService {
     @Value("${jwt.secret}")
-    private String SECRET_KEY;
+    private String secretKey;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -54,17 +54,16 @@ public class JwtServiceImpl implements JwtService {
     }
 
     public String generateToken(AppUser appUser) {
-        String token = Jwts.builder()
-                .subject(appUser.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 24*60*60*1000))
+        return Jwts.builder()
+                .setSubject(appUser.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 24*60*60*1000))
                 .signWith(getSigninKey())
                 .compact();
-        return token;
     }
 
     private SecretKey getSigninKey() {
-        byte[] keyBytes = Decoders.BASE64URL.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64URL.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
