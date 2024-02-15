@@ -24,6 +24,8 @@ public class SecurityConfig {
     private final UserDetailServiceImpl userDetailServiceImpl;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private static final String ROLE_ADMIN = "ADMIN";
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -34,9 +36,9 @@ public class SecurityConfig {
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers("/login/**", "/register/**").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers("/api/v1/role/saveRole", "/api/v1/role/updateRole").hasAuthority("ADMIN")
-                        .requestMatchers("api/v1/champion/saveChampion", "/api/v1/champion/updateChampion").hasAuthority("ADMIN")
-                        .requestMatchers("/api/v1/skill/saveSkill", "/api/v1/skill/updateSkill").hasAuthority("ADMIN")
+                        .requestMatchers("/api/v1/role/saveRole", "/api/v1/role/updateRole").hasAuthority(ROLE_ADMIN)
+                        .requestMatchers("api/v1/champion/saveChampion", "/api/v1/champion/updateChampion").hasAuthority(ROLE_ADMIN)
+                        .requestMatchers("/api/v1/skill/saveSkill", "/api/v1/skill/updateSkill").hasAuthority(ROLE_ADMIN)
                         .anyRequest().authenticated());
         return http.build();
     }
