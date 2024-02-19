@@ -25,6 +25,6 @@ public class FindChampionBean extends AbstractResponsePayload {
         if(championOptional.isPresent()) {
             return setResponse(championDtoMapper.map(championOptional.get()));
         }
-        return  setResponse(ResponseEnum.NOT_FOUND, MessageEnum.NOT_FOUND.getMessage());
+        return  setResponse(ResponseEnum.NOT_FOUND, MessageEnum.CHAMPION_NOT_FOUND.getMessage());
     }
 }
