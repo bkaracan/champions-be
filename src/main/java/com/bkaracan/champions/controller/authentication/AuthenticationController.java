@@ -1,5 +1,6 @@
 package com.bkaracan.champions.controller.authentication;
 
+import com.bkaracan.champions.dto.AppUserDTO;
 import com.bkaracan.champions.entity.AppUser;
 import com.bkaracan.champions.entity.AuthenticationResponse;
 import com.bkaracan.champions.enumeration.core.ResponseEnum;
@@ -19,7 +20,7 @@ public class AuthenticationController extends AbstractResponsePayload {
     private final AuthenticationService authenticationService;
 
     @PostMapping(value = "/register")
-    public ResponsePayload<AuthenticationResponse> register(@RequestBody AppUser request) {
+    public ResponsePayload<AuthenticationResponse> register(@RequestBody AppUserDTO request) {
         return setResponse(ResponseEnum.OK, authenticationService.register(request));
     }
 

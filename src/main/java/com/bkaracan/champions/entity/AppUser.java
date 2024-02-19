@@ -44,6 +44,9 @@ public class AppUser implements UserDetails, Serializable {
     @Column(name = "user_name")
     private String username;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "password")
     private String password;
 
