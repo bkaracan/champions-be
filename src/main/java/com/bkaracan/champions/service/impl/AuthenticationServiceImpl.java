@@ -36,7 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         AppUser user = appUserDtoMapper.convertToEntity(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(AppUserRoleEnum.USER);
+        user.setRole(AppUserRoleEnum.valueOf(request.getRole()));
         user = appUserRepository.save(user);
         String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token);
