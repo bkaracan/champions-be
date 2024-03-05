@@ -8,19 +8,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppUserDtoMapper {
 
-    public AppUser convertToEntity(AppUserDTO appUserDTO) {
+    public AppUser convertToEntity(AppUserDTO register) {
         AppUser appUser = new AppUser();
-        appUser.setId(appUserDTO.getId());
-        appUser.setFirstName(appUserDTO.getFirstName());
-        appUser.setLastName(appUserDTO.getLastName());
-        appUser.setUsername(appUserDTO.getUsername());
-        appUser.setEmail(appUserDTO.getEmail());
-        appUser.setPassword(appUserDTO.getPassword());
-        if(appUserDTO.getRole() == null) {
-            appUser.setRole(AppUserRoleEnum.USER);
-        }else{
-            appUser.setRole(AppUserRoleEnum.valueOf(appUserDTO.getRole()));
-        }
+        appUser.setId(register.getId());
+        appUser.setFirstName(register.getFirstName());
+        appUser.setLastName(register.getLastName());
+        appUser.setUsername(register.getUsername());
+        appUser.setEmail(register.getEmail());
+        appUser.setPassword(register.getPassword());
+        appUser.setRole(AppUserRoleEnum.valueOf(register.getRole().toString()));
         return appUser;
     }
 
