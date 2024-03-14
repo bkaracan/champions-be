@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -28,6 +29,13 @@ public class SaveChampionBean extends AbstractResponsePayload {
 
     @Transactional
     public ResponsePayload<ChampionDTO> saveChampion(ChampionDTO championDTO) {
+
+        Optional<Champion> existingChampion = championRepository.findByName(championDTO.getName());
+
+        if (existingChampion.isPresent()) {
+            return setResponse(ResponseEnum.ERROR, MessageEnum.RECORD_EXISTS, championDTO);
+        }
+
         if (championDTO.getId() == null) {
             Champion champion = championDtoMapper.convertToEntity(championDTO);
             if (championDTO.getRoleIds() != null && !championDTO.getRoleIds().isEmpty()) {
@@ -40,5 +48,6 @@ public class SaveChampionBean extends AbstractResponsePayload {
         }
         return setResponse(ResponseEnum.ERROR, MessageEnum.ID_MUST_BE_NULL.getMessage());
     }
+
 }
 

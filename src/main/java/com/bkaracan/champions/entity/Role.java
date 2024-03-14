@@ -1,6 +1,5 @@
 package com.bkaracan.champions.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +29,5 @@ public class Role implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "champion_role", joinColumns = @JoinColumn(name = "role_id"),
     inverseJoinColumns = @JoinColumn(name = "champion_id"))
-    @JsonIgnore
     private List<Champion> champions;
 }
