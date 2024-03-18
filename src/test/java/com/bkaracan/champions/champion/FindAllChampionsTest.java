@@ -61,7 +61,7 @@ class FindAllChampionsTest {
         assertEquals(expectedResponse.getCode(), actualResponse.getCode(), "Codes don't match!");
         assertEquals(expectedResponse.getMessage(), actualResponse.getMessage(), "Messages don't match!");
         assertEquals(expectedResponse.getIsSuccess(), actualResponse.getIsSuccess(), "Success responses don't match!");
-        assertEquals(expectedResponse.getData(), actualResponse.getData(), "Data don't match!");
+        assertEquals(expectedResponse.getData(), actualResponse.getData(), "Data doesn't match!");
         assertEquals(expectedResponse.getResponseEnum(), actualResponse.getResponseEnum(), "Response enums don't match!");
 
         verify(listChampionBean, times(1)).getAllChampions();
