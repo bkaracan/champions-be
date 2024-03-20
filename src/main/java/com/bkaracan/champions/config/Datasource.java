@@ -9,16 +9,16 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 public class Datasource {
 
-    @Value("${db.driverClassName}")
+    @Value("${spring.datasource.driver-class-name}")
     private String driverClass;
-    @Value("${db.url}")
+    @Value("${spring.datasource.url}")
     private String url;
-    @Value("${db.username}")
+    @Value("${spring.datasource.username}")
     private String username;
-    @Value("${db.password}")
+    @Value("${spring.datasource.password}")
     private String password;
 
     @Bean
