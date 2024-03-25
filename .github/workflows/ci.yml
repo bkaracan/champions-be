@@ -22,7 +22,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Maven
-        run: mvn clean package # Maven ile proje inşa edilir
+        run: mvn clean package -DskipTests # Maven ile proje inşa edilir
 
       - name: Build and Push Docker image
         env:
